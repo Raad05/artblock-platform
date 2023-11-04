@@ -1,21 +1,8 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useNavigate } from "react-router-dom";
-import artblockABI from "../../../src/artifacts/artblockABI.json";
-import { readContract } from "@wagmi/core";
-import { useEffect, useState } from "react";
-import {
-  prepareWriteContract,
-  waitForTransaction,
-  writeContract,
-} from "@wagmi/core";
-import { useAccount } from "wagmi";
 
 const Header = () => {
   const navigate = useNavigate();
-  const artblockAddress = "0x410a25c0324c710B72Ea091e884d865cDb40c6Fa";
-  const { address } = useAccount();
-
-  const [result, setResult] = useState(0);
 
   return (
     <div className="flex justify-between bg-black p-5">
@@ -39,9 +26,6 @@ const Header = () => {
           Buy ABX
         </button>
         <ConnectButton></ConnectButton>
-        <p className="text-lg bg-green-600 text-white p-2 rounded">
-          Total ABX: {result}
-        </p>
       </div>
       <form>
         <dialog id="my_modal_1" className="modal text-center">

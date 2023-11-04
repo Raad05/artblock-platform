@@ -5,6 +5,7 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 contract CommunityContract {
     struct Community {
+        address communityAddress;
         string name;
         string description;
         uint totalMembers;
@@ -14,12 +15,18 @@ contract CommunityContract {
         uint exchangeRate;
     }
 
-    struct StakingInfo {
-        uint stakedAmount;
-        uint unlockTime; // When the staked amount can be withdrawn
-    }
-
     Community[] public communities;
+    address[] public members;
+
+    // Mapping to track which community a member belongs to
+    mapping(address => uint) public memberToCommunity;
+
+    function addMembers(uint _communityIdx) public {
+        require(_communityIdx < communities.length, "Invalid community index");
+        members.push(msg.sender);
+        memberToCommunity[msg.sender] = _communityIdx;
+        communities[_communityIdx].totalMembers++;
+    }
 
     function createCommunity(
         string memory _name,
@@ -29,6 +36,7 @@ contract CommunityContract {
         uint _exchangeRate
     ) public {
         Community memory newCommunity = Community({
+            communityAddress: msg.sender,
             name: _name,
             description: _description,
             totalMembers: 0,
