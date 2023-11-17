@@ -1,5 +1,3 @@
-Certainly! Below is a refined version of your `README.md`:
-
 # ArtBlock: Creator-Based NFT Platform
 
 
